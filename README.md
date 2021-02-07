@@ -1,7 +1,7 @@
 Introduction
 ------------
 
-This module contains fundamental zip files manipulation functions to implement in an npm project.
+This module contains a fundamental zip files manipulation functions to implement in an npm project.
 
 ## Installation
 Install via npm:
@@ -11,11 +11,11 @@ Install via npm:
 
 ## Usage       
 Require zip handler:
-        
-    var zh = require("os-zip-handler")
-
+```js
+var zh = require("os-zip-handler")
+```
 ## Functions and signatures:
-
+```js
     /**
      * Will extract a bunch of zips, from their archive, each to a given destination
      *
@@ -25,7 +25,7 @@ Require zip handler:
      * things in order
      */
     extractZips: async function (zips, createIndividualDirs=true) 
-
+```
 And more...
 
 

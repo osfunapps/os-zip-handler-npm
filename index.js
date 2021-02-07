@@ -15,24 +15,22 @@ const self = module.exports = {
 
         if (Array.isArray(zips)) {
             for (let i = 0; i < zips.length; i++) {
-                let dest = fh.getParentDir(zips[i]);
+                let dest = fh.getParentDirPath(zips[i]);
                 if(createIndividualDirs) {
-                    dest = fh.joinPath(dest, self.getFileNameFromPath(zips[i], false))
+                    dest = fh.joinPath(dest, fh.getFileNameFromPath(zips[i], false))
                 }
                 fh.createDir(dest);
                 await extractZip(zips[i], dest);
-                console.log("done!!")
             }
         } else {
             for (let zipPath in zips) {
                 if (zips.hasOwnProperty(zipPath)) {
                     let dest = zips[zipPath];
                     if(createIndividualDirs) {
-                        dest = fh.joinPath(dest, self.getFileNameFromPath(zipPath, false))
+                        dest = fh.joinPath(dest, fh.getFileNameFromPath(zipPath, false))
                     }
                     fh.createDir(dest);
                     await extractZip(zipPath, dest);
-                    console.log("done!!")
                 }
             }
         }
@@ -41,6 +39,11 @@ const self = module.exports = {
 
 function extractZip(zipPath, destPath) {
     return new Promise(async function (resolve, reject) {
+        if(!await fh.isFileOrDirExists(zipPath)) {
+            console.log("ERROR: Can't extract non existing zip: " + zipPath)
+            resolve()
+            return
+        }
         const zip = new StreamZip({file: zipPath, storeEntries: true});
         zip.on('ready', () => {
             zip.extract(null, destPath, (err, count) => {

@@ -1,6 +1,6 @@
 {
   "name": "os-zip-handler",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "This module contains fundamental zip files manipulation functions to implement in an npm project.",
   "main": "index.js",
   "keywords": [
@@ -10,5 +10,9 @@
     "npm"
   ],
   "author": "osfunapps",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "node-stream-zip": "latest",
+    "os-file-handler": "latest"
+  }
 }
